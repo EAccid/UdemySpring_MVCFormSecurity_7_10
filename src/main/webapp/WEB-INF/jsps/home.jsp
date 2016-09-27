@@ -9,10 +9,11 @@
 
 Hi there! <p/>
 
-lesson 56 - Session: <%= session.getAttribute("name") %> <p/>
-lesson 57 - Request: <%= request.getAttribute("name") %> <p/>
+<%--lesson 56 - Session: <%= session.getAttribute("name") %> <p/>--%>
+<%--lesson 57 - Request: <%= request.getAttribute("name") %> <p/>--%>
 
-lesson 57 - Request (using EL): ${name} <p/>
+lesson 57 - Request (using EL): ${nameBold} <p/>
+
 <c:out value="${name}">|</c:out> <p/>
 
 </body>

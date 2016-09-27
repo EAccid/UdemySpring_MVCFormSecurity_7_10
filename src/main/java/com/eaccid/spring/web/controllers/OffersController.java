@@ -10,6 +10,7 @@ public class OffersController {
 
     @RequestMapping("/")
     public String showHome(Model model) {
+        model.addAttribute("nameBold", "<b>Tiffany</b>");
         model.addAttribute("name", "<b>Tiffany</b>");
         return "home";
     }
