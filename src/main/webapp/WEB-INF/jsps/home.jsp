@@ -8,22 +8,11 @@
 </head>
 <body>
 
-Hi there! <p/>
-
-<%--lesson 56 - Session: <%= session.getAttribute("name") %> <p/>--%>
-<%--lesson 57 - Request: <%= request.getAttribute("name") %> <p/>--%>
-
-lesson 57 - Request (using EL): ${nameBold} <p/>
-
-<c:out value="${name}">|</c:out> <p/>
-
-<sql:query var="rs" dataSource="jdbc/springUdemy">
-    select id, name, email, text from offers
-</sql:query>
-
-<c:forEach var="row" items="${rs.rows}">
+<c:forEach var="row" items="${offers}">
     ID ${row.id}<br/>
     Name ${row.name}<br/>
+    Email ${row.email}<br/>
+    Text ${row.text}<br/>
 </c:forEach>
 
 </body>
