@@ -19,13 +19,18 @@ public class OffersController {
     }
 
     //arguments described in home.xml
-    @RequestMapping("/")
-    public String showHome(Model model) {
+    @RequestMapping("/offers")
+    public String showOffers(Model model) {
 
         List<Offer> offers = offersService.getCurrent();
         model.addAttribute("offers", offers);
-
-        return "home";
+        return "offers";
     }
 
+    //arguments described in home.xml
+    @RequestMapping("/createoffer")
+    public String createOffer(Model model) {
+
+        return "createoffer";
+    }
 }
