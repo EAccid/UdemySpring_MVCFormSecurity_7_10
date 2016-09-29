@@ -43,6 +43,8 @@ public class OffersController {
     @RequestMapping("/createoffer")
     public String createOffer(Model model) {
 
+        model.addAttribute("offer", new Offer()); //<sform:form method="post" action="${pageContext.request.contextPath}/docreate" commandName="offer">
+
         return "createoffer";
     }
 
@@ -54,6 +56,8 @@ public class OffersController {
 
             List<ObjectError> errors = result.getAllErrors();
             errors.stream().forEach(error -> System.out.println(error.getDefaultMessage()));
+
+            return "createoffer";
 
         } else {
             System.out.println("Form validated.");
