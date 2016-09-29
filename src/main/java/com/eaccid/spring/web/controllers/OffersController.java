@@ -29,10 +29,10 @@ public class OffersController {
         return "home";
     }
 
-
     @RequestMapping("/offers")
     public String showOffers(Model model) {
 
+//        offersService.throwTestException();
         List<Offer> offers = offersService.getCurrent();
         model.addAttribute("offers", offers);
         return "offers";
@@ -55,10 +55,12 @@ public class OffersController {
 //            List<ObjectError> errors = result.getAllErrors();
 //            errors.stream().forEach(error -> System.out.println(error.getDefaultMessage()));
             return "createoffer";
-
-        } else {
-            System.out.println("Form validated.");
+//        } else {
+//            System.out.println("Form validated.");
         }
+
+        offersService.create(offer);
+
         return "offercreated";
     }
 

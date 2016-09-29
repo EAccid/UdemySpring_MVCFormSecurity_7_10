@@ -12,10 +12,22 @@
 <html>
 <head>
     <title>offers</title>
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/static/css/mainstyle.css">
 </head>
 <body>
-<c:forEach var="offer" items="${offers}">
-    <p> <c:out value="${offer}"></c:out></p>
-</c:forEach>
+<table class="offers">
+    <tr>
+        <td>Name</td>
+        <td>Email</td>
+        <td>Offer</td>
+    </tr>
+    <c:forEach var="offer" items="${offers}">
+        <tr>
+            <td><c:out value="${offer.name}"/></td>
+            <td><c:out value="${offer.email}"/></td>
+            <td><c:out value="${offer.text}"/></td>
+        </tr>
+    </c:forEach>
+</table>
 </body>
 </html>
