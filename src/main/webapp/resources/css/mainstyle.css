@@ -33,3 +33,8 @@ table.offers {
     padding: 20px;
     border: 1px solid grey;
 }
+
+p.error {
+    font-size: medium;
+    color: blue;
+}
