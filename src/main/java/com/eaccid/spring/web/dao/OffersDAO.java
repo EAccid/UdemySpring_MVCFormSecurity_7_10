@@ -11,11 +11,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Component("offersDao")
-public class OffersDAO {
+public class OffersDao {
 
     private NamedParameterJdbcTemplate jdbc;
 
-    public OffersDAO() {
+    public OffersDao() {
         System.out.println("Successfully loaded offers DAO");
     }
 

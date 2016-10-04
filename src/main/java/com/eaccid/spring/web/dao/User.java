@@ -4,26 +4,21 @@ public class User {
 
     private String username;
     private String password;
+    private String email;
     private boolean enabled = false;
     private String authority;
-    private String email;
+
 
     public User() {
+
     }
 
-    public User(String username, String password, boolean enabled, String authority, String email) {
+    public User(String username, String password, String email, boolean enabled, String authority) {
         this.username = username;
         this.password = password;
+        this.email = email;
         this.enabled = enabled;
         this.authority = authority;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getUsername() {
@@ -57,4 +52,14 @@ public class User {
     public void setAuthority(String authority) {
         this.authority = authority;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
 }

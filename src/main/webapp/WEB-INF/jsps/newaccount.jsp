@@ -16,6 +16,8 @@
 
 <body>
 
+<h2>Create New Account</h2>
+
 <sform:form method="post" action="${pageContext.request.contextPath}/createaccount" commandName="user">
 
     <table class="formtable">
