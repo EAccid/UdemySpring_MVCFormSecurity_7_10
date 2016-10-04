@@ -44,7 +44,7 @@ public class OffersController {
 
         model.addAttribute("offer", new Offer()); //<sform:form method="post" action="${pageContext.request.contextPath}/docreate" commandName="offer">
 
-        return "createoffer";
+        return "newaccount";
     }
 
     @RequestMapping(value = "/docreate", method = RequestMethod.POST)
@@ -54,7 +54,7 @@ public class OffersController {
 //            System.out.println("Form does not validate.");
 //            List<ObjectError> errors = result.getAllErrors();
 //            errors.stream().forEach(error -> System.out.println(error.getDefaultMessage()));
-            return "createoffer";
+            return "newaccount";
 //        } else {
 //            System.out.println("Form validated.");
         }

@@ -11,25 +11,39 @@
 
 <head>
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/static/css/mainstyle.css">
-    <title>createoffer</title>
+    <title>Create New Account</title>
 </head>
 
 <body>
 
-<sform:form method="post" action="${pageContext.request.contextPath}/docreate" commandName="offer">
+<sform:form method="post" action="${pageContext.request.contextPath}/createaccount" commandName="user">
 
     <table class="formtable">
 
-        <tr><td class="label">Name:</td><td><sform:input class="control" path="name" name="name" type="text"/><br/>
-                  <sform:errors path="name" cssClass="error"></sform:errors></td></tr>
-
-        <tr><td class="label">Email:</td><td><sform:input class="control" path="email" name="email" type="text"/><br/>
-            <sform:errors path="email" cssClass="error"></sform:errors></td></tr>
-
-        <tr><td class="label">Your offer:</td><td><sform:textarea class="control" path="text" name="text" rows="10" cols="10"/><br/>
-            <sform:errors path="text" cssClass="error"></sform:errors></td></tr>
-
-        <tr><td class="label"></td><td><input class="control" value="Create advert" type="submit"></td></tr>
+        <tr>
+            <td class="label">Username:</td>
+            <td><sform:input class="control" path="username" name="username" type="text"/><br/>
+                <sform:errors path="username" cssClass="error"/></td>
+        </tr>
+        <tr>
+            <td class="label">Email:</td>
+            <td><sform:input class="control" path="email" name="email" type="text"/><br/>
+                <sform:errors path="email" cssClass="error"/></td>
+        </tr>
+        <tr>
+            <td class="label">Password:</td>
+            <td><sform:input class="control" path="password" name="password" type="text"/><br/>
+                <sform:errors path="password" cssClass="error"/></td>
+        </tr>
+        <tr>
+            <td class="label">Confirm Password:</td>
+            <td><input class="control" name="confimpass" type="text"/><br/>
+            </td>
+        </tr>
+        <tr>
+            <td class="label"></td>
+            <td><input class="control" value="Create account" type="submit"></td>
+        </tr>
 
     </table>
 
