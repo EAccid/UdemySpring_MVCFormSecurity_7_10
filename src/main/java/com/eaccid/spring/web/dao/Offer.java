@@ -8,15 +8,15 @@ import javax.validation.constraints.Size;
 public class Offer {
     private int id;
 
-    @Size(min = 5, max=100, message = "Name must be between 5 and 100 characters.")
+    @Size(min = 5, max=100)
     private String name;
 
     @NotNull
 //    @Pattern(regexp = ".*\\@.*\\..*", message = "This does not appear to be a valid email address")
-    @ValidEmail(min = 6, message = "This adrress is not valid.")
+    @ValidEmail(min = 6)
     private String email;
 
-    @Size(min = 20, max=255, message = "Text must be between 20 and 255 characters.")
+    @Size(min = 20, max=255)
     private String text;
 
     public Offer() {
