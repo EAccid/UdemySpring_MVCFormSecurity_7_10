@@ -27,6 +27,16 @@ public class LoginController {
         return "login";
     }
 
+    @RequestMapping("/loggedout")
+    public String showLoggedOut() {
+        return "loggedout";
+    }
+
+    @RequestMapping("/logout")
+    public String logoutUrl(){
+        return "logout";
+    }
+
     @RequestMapping("/newaccount")
     public String showNewAccount(Model model) {
 
@@ -35,7 +45,6 @@ public class LoginController {
         return "newaccount";
     }
 
-
     @RequestMapping(value = "/createaccount", method = RequestMethod.POST)
     public String createAccount(@Valid User user, BindingResult result) {
 
@@ -43,7 +52,7 @@ public class LoginController {
             return "newaccount";
         }
 
-        user.setAuthority("user");
+        user.setAuthority("ROLE_USER");
         user.setEnabled(true);
 
         if (usersService.exists(user.getUsername())) {
