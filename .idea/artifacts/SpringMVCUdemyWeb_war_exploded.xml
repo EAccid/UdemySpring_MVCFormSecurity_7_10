@@ -16,7 +16,6 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-context:4.1.7.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.1.7.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.1.7.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.1.7.RELEASE" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.26" />
           <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
@@ -35,6 +34,7 @@
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:4.0.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-taglibs:3.2.7.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-acl:3.2.7.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.1.7.RELEASE" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -87,7 +87,7 @@
         </tr>
         <tr>
             <td class="label">Password:</td>
-            <td><sform:input id="password" class="control" path="password" name="password" type="text"/><br/>
+            <td><sform:input id="password" class="control" path="password" name="password" type="password"/><br/>
                 <div class="error"><sform:errors path="password"/></div>
             </td>
         </tr>
