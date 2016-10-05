@@ -22,6 +22,10 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="com/eaccid/spring/web/messages/messages" />
+    </bean>
+
     <mvc:resources mapping="/static/**" location="/resources/"/>
-    
+
 </beans>

@@ -25,17 +25,17 @@
         <tr>
             <td class="label">Username:</td>
             <td><sform:input class="control" path="username" name="username" type="text"/><br/>
-                <sform:errors path="username" cssClass="error"/></td>
+                <div class="error"> <sform:errors path="username" /></div> </td>
         </tr>
         <tr>
             <td class="label">Email:</td>
             <td><sform:input class="control" path="email" name="email" type="text"/><br/>
-                <sform:errors path="email" cssClass="error"/></td>
+                <div class="error"><sform:errors path="email" /></div></td>
         </tr>
         <tr>
             <td class="label">Password:</td>
             <td><sform:input class="control" path="password" name="password" type="text"/><br/>
-                <sform:errors path="password" cssClass="error"/></td>
+                <div class="error"><sform:errors path="password" /></div></td>
         </tr>
         <tr>
             <td class="label">Confirm Password:</td>
