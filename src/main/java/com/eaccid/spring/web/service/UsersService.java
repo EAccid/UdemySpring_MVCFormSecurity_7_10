@@ -5,6 +5,8 @@ import com.eaccid.spring.web.dao.UsersDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("usersService")
 public class UsersService {
 
@@ -21,5 +23,11 @@ public class UsersService {
 
     public boolean exists(String username) {
         return usersDao.exists(username);
+    }
+
+    public List<User> getAllUsers() {
+
+        return usersDao.getAllUsers();
+
     }
 }

@@ -1,6 +1,7 @@
 @charset "US-ASCII";
 
 .formtable {
+    width: 600px;
     padding: 10px;
     border: 1px solid blue;
 }
