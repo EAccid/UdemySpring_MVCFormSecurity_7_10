@@ -25,6 +25,10 @@
             <td><input type='password' name='password'/></td>
         </tr>
         <tr>
+            <td>Remember me:</td>
+            <td><input type='checkbox' name='_spring_security_remember_me' checked = 'checked'/></td>
+        </tr>
+        <tr>
             <td colspan='2'><input name="submit" type="submit" value="Log in"/></td>
         </tr>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
