@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ErrorHandler {
 
+    @ExceptionHandler(Exception.class)
+    public String handleDatabaseException(Exception ex) {
+        ex.printStackTrace();
+        return "underdev";
+    }
+
     @ExceptionHandler(DataAccessException.class)
     public String handleDatabaseException(DataAccessException ex) {
         return "error";

@@ -28,11 +28,50 @@
         <put-attribute name="content" value="/WEB-INF/tiles/login.jsp"/>
     </definition>
 
-
     <definition name="newaccount" extends="offers.base">
         <put-attribute name="includes" value="/WEB-INF/tiles/newaccountscript.jsp"/>
-        <put-attribute name="title" value="Create account"/>
+        <put-attribute name="title" value="Create Account"/>
         <put-attribute name="content" value="/WEB-INF/tiles/newaccount.jsp"/>
+    </definition>
+
+    <definition name="accountcreated" extends="offers.base">
+        <put-attribute name="title" value="Account Created"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/accountcreated.jsp"/>
+    </definition>
+
+    <definition name="admin" extends="offers.base">
+        <put-attribute name="title" value="Admin"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/admin.jsp"/>
+    </definition>
+
+    <definition name="createoffer" extends="offers.base">
+        <put-attribute name="title" value="Create Offer"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/createoffer.jsp"/>
+    </definition>
+
+    <definition name="denied" extends="offers.base">
+        <put-attribute name="title" value="Access Denied"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/denied.jsp"/>
+    </definition>
+
+    <definition name="error" extends="offers.base">
+        <put-attribute name="title" value="Error"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/error.jsp"/>
+    </definition>
+
+    <definition name="loggedout" extends="offers.base">
+        <put-attribute name="title" value="Error"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/loggedout.jsp"/>
+    </definition>
+
+    <definition name="offercreated" extends="offers.base">
+        <put-attribute name="title" value="Offer Created"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/offercreated.jsp"/>
+    </definition>
+
+    <definition name="underdev" extends="offers.base">
+        <put-attribute name="title" value="Offer Created"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/underdev.jsp"/>
     </definition>
 
 </tiles-definitions>
