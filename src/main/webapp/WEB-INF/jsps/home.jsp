@@ -14,19 +14,19 @@
 
 
 
-<sec:authorize access="!isAuthenticated()">
-    <form action="<c:url value="/login"/>">
-        <input type="submit" value="Log in"/>
-    </form>
-</sec:authorize>
+<%--<sec:authorize access="!isAuthenticated()">--%>
+    <%--<form action="<c:url value="/login"/>">--%>
+        <%--<input type="submit" value="Log in"/>--%>
+    <%--</form>--%>
+<%--</sec:authorize>--%>
 
 
-<sec:authorize access="isAuthenticated()">
-    <form action="${pageContext.request.contextPath}/logout" method="post">
-        <input type="submit" value="Log out"/>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    </form>
-</sec:authorize>
+<%--<sec:authorize access="isAuthenticated()">--%>
+    <%--<form action="${pageContext.request.contextPath}/logout" method="post">--%>
+        <%--<input type="submit" value="Log out"/>--%>
+        <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
+    <%--</form>--%>
+<%--</sec:authorize>--%>
 
 <sec:authorize access="hasRole('ROLE_ADMIN')">
     <p><a href="${pageContext.request.contextPath}/admin"> --> Admin</a></p>
