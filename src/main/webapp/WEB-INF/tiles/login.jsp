@@ -1,18 +1,20 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<html>
-<head><title>Login Page</title>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/static/css/mainstyle.css">
-</head>
-<body onload='document.f.username.focus();'>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        document.f.username.focus()
+    });
+
+</script>
+
 <h3>Login with Username and Password</h3>
 
 <c:if test="${param.error != null}">
     <p class="error">Login failed. Check that your username and password are correct.</p>
 </c:if>
-
 
 <form name='f' action='${pageContext.request.contextPath}/login' method='POST'>
     <table class="formtable">
@@ -26,7 +28,7 @@
         </tr>
         <tr>
             <td>Remember me:</td>
-            <td><input type='checkbox' name='_spring_security_remember_me' checked = 'checked'/></td>
+            <td><input type='checkbox' name='_spring_security_remember_me' checked='checked'/></td>
         </tr>
         <tr>
             <td colspan='2'><input name="submit" type="submit" value="Log in"/></td>
@@ -36,6 +38,3 @@
 </form>
 
 <p><a href="<c:url value="/newaccount"/>">Create new account</a></p>
-
-</body>
-</html>

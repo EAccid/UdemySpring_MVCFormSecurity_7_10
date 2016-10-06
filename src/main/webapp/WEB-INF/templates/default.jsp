@@ -14,6 +14,7 @@
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/static/css/mainstyle.css">
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/static/script/jquery.js"></script>
+    <tiles:insertAttribute name="includes"/>
 </head>
 <body>
 

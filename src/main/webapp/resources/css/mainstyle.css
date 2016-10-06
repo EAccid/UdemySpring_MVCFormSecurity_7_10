@@ -3,7 +3,7 @@
 .formtable {
     width: 600px;
     padding: 10px;
-    border: 1px solid blue;
+    border: 2px solid blue;
 }
 
 input[type = text] {
@@ -42,7 +42,7 @@ textarea {
 
 table.offers {
     padding: 20px;
-    border: 1px solid grey;
+    border: 2px solid rebeccapurple;
 }
 
 p.error {

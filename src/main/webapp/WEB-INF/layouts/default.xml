@@ -4,10 +4,35 @@
         "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 
 <tiles-definitions>
-    <definition name="home" template="/WEB-INF/templates/default.jsp">
-        <put-attribute name="title" value="Offers homepage"/>
+
+    <definition name="offers.base" template="/WEB-INF/templates/default.jsp">
+        <put-attribute name="includes" value=""/>
+        <put-attribute name="title" value="Offers Homepage"/>
         <put-attribute name="header" value="/WEB-INF/tiles/header.jsp"/>
         <put-attribute name="content" value="/WEB-INF/tiles/content.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"/>
     </definition>
+
+    <definition name="home" extends="offers.base">
+        <put-attribute name="title" value="Offers Homepage"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/home.jsp"/>
+    </definition>
+
+    <definition name="offers" extends="offers.base">
+        <put-attribute name="title" value="Current Offers"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/offers.jsp"/>
+    </definition>
+
+    <definition name="login" extends="offers.base">
+        <put-attribute name="title" value="Login"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/login.jsp"/>
+    </definition>
+
+
+    <definition name="newaccount" extends="offers.base">
+        <put-attribute name="includes" value="/WEB-INF/tiles/newaccountscript.jsp"/>
+        <put-attribute name="title" value="Create account"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/newaccount.jsp"/>
+    </definition>
+
 </tiles-definitions>
