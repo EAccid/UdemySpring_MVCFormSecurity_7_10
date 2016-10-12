@@ -69,7 +69,6 @@ public class Offer {
         this.text = text;
     }
 
-
     @Override
     public String toString() {
         return "Offer{" +
@@ -78,5 +77,26 @@ public class Offer {
                 ", email='" + email + '\'' +
                 ", text='" + text + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Offer offer = (Offer) o;
+
+        if (name != null ? !name.equals(offer.name) : offer.name != null) return false;
+        if (email != null ? !email.equals(offer.email) : offer.email != null) return false;
+        return text != null ? text.equals(offer.text) : offer.text == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        return result;
     }
 }
