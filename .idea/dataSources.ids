@@ -71,56 +71,58 @@
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
     <database-model serializer="dbm" rdbms="MYSQL" format-version="2.4">
       <schema id="1" name="springtest"/>
-      <table id="2" parent="1" name="authorities"/>
-      <table id="3" parent="1" name="offers"/>
-      <table id="4" parent="1" name="users"/>
-      <column id="5" parent="2" name="username">
-        <mandatory>1</mandatory>
-        <data-type>varchar(60)</data-type>
-      </column>
-      <column id="6" parent="2" name="authority">
-        <data-type>varchar(45)</data-type>
-      </column>
-      <key id="7" parent="2" name="PRIMARY">
-        <columns>username</columns>
-        <primary>1</primary>
-      </key>
-      <column id="8" parent="3" name="id">
+      <table id="2" parent="1" name="offers"/>
+      <table id="3" parent="1" name="users"/>
+      <column id="4" parent="2" name="id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="9" parent="3" name="name">
-        <mandatory>1</mandatory>
-        <data-type>varchar(100)</data-type>
-      </column>
-      <column id="10" parent="3" name="email">
-        <mandatory>1</mandatory>
-        <data-type>varchar(60)</data-type>
-      </column>
-      <column id="11" parent="3" name="text">
+      <column id="5" parent="2" name="text">
         <mandatory>1</mandatory>
         <data-type>text</data-type>
       </column>
-      <key id="12" parent="3" name="PRIMARY">
-        <columns>id</columns>
-        <primary>1</primary>
-      </key>
-      <column id="13" parent="4" name="username">
+      <column id="6" parent="2" name="username">
         <mandatory>1</mandatory>
         <data-type>varchar(60)</data-type>
       </column>
-      <column id="14" parent="4" name="password">
+      <index id="7" parent="2" name="fk_offers_users_idx">
+        <columns>username</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="8" parent="2" name="PRIMARY">
+        <columns>id
+username</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="9" parent="2" name="fk_offers_users">
+        <columns>username</columns>
+        <ref-key>~.users.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="10" parent="3" name="username">
+        <mandatory>1</mandatory>
+        <data-type>varchar(60)</data-type>
+      </column>
+      <column id="11" parent="3" name="password">
         <data-type>varchar(80)</data-type>
       </column>
-      <column id="15" parent="4" name="enabled">
+      <column id="12" parent="3" name="enabled">
         <data-type>tinyint(1)</data-type>
         <default-expression>&apos;1&apos;</default-expression>
       </column>
-      <column id="16" parent="4" name="email">
+      <column id="13" parent="3" name="email">
         <mandatory>1</mandatory>
         <data-type>varchar(60)</data-type>
       </column>
-      <key id="17" parent="4" name="PRIMARY">
+      <column id="14" parent="3" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="15" parent="3" name="authority">
+        <data-type>varchar(45)</data-type>
+      </column>
+      <key id="16" parent="3" name="PRIMARY">
         <columns>username</columns>
         <primary>1</primary>
       </key>

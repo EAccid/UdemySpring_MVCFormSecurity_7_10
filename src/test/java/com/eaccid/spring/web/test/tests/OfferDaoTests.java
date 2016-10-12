@@ -2,6 +2,9 @@ package com.eaccid.spring.web.test.tests;
 
 import com.eaccid.spring.web.dao.Offer;
 import com.eaccid.spring.web.dao.OffersDao;
+import com.eaccid.spring.web.dao.User;
+import com.eaccid.spring.web.dao.UsersDao;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +32,9 @@ public class OfferDaoTests {
     private OffersDao offersDao;
 
     @Autowired
+    private UsersDao usersDao;
+
+    @Autowired
     private DataSource dataSource;
 
     @Before
@@ -37,13 +43,16 @@ public class OfferDaoTests {
 
         jdbc.execute("delete from offers");
         jdbc.execute("delete from users");
-        jdbc.execute("delete from authorities");
     }
 
     @Test
     public void testCreateUser() {
 
-        Offer offer = new Offer("johnwpurcell", "john@caveofprogramming.com", "This is a test offer.");
+        User user = new User("olena", "Olena B","hellohello", "olena@eaccid.com", true, "ROLE_USER");
+        Assert.assertTrue("User creation should return true", usersDao.create(user));
+
+
+        Offer offer = new Offer(user, "This is a test offer.");
 
         assertTrue("Offer creation should return true", offersDao.create(offer));
 

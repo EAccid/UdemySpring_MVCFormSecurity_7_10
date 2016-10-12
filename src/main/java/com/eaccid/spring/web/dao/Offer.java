@@ -1,39 +1,27 @@
 package com.eaccid.spring.web.dao;
 
-import com.eaccid.spring.web.validation.ValidEmail;
-
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class Offer {
     private int id;
 
-    @Size(min = 5, max=100)
-    private String name;
-
-    @NotNull
-//    @Pattern(regexp = ".*\\@.*\\..*", message = "This does not appear to be a valid email address")
-    @ValidEmail(min = 6)
-    private String email;
-
-    @Size(min = 20, max=255)
+    @Size(min = 20, max = 255)
     private String text;
+
+    private User user;
 
     public Offer() {
 
     }
 
-    public Offer(String name, String email, String text) {
-        this.name = name;
-        this.email = email;
+    public Offer(User user, String text) {
+        this.user = user;
         this.text = text;
     }
 
-    public Offer(int id, String name, String email, String text) {
-        super();
+    public Offer(int id, User user, String text) {
         this.id = id;
-        this.name = name;
-        this.email = email;
+        this.user = user;
         this.text = text;
     }
 
@@ -45,22 +33,6 @@ public class Offer {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getText() {
         return text;
     }
@@ -69,13 +41,26 @@ public class Offer {
         this.text = text;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
+    public String getUsername() {
+        return user.getUsername();
+    }
+
+
     @Override
     public String toString() {
         return "Offer{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
                 ", text='" + text + '\'' +
+                ", user=" + user +
                 '}';
     }
 
@@ -86,17 +71,15 @@ public class Offer {
 
         Offer offer = (Offer) o;
 
-        if (name != null ? !name.equals(offer.name) : offer.name != null) return false;
-        if (email != null ? !email.equals(offer.email) : offer.email != null) return false;
-        return text != null ? text.equals(offer.text) : offer.text == null;
+        if (text != null ? !text.equals(offer.text) : offer.text != null) return false;
+        return user != null ? user.equals(offer.user) : offer.user == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (text != null ? text.hashCode() : 0);
+        int result = text != null ? text.hashCode() : 0;
+        result = 31 * result + (user != null ? user.hashCode() : 0);
         return result;
     }
 }
