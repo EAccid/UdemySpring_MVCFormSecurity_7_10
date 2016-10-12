@@ -16,6 +16,12 @@
             </td>
         </tr>
         <tr>
+            <td class="label">Name:</td>
+            <td><sform:input class="control" path="name" name="name" type="text"/><br/>
+                <div class="error"><sform:errors path="name"/></div>
+            </td>
+        </tr>
+        <tr>
             <td class="label">Email:</td>
             <td><sform:input class="control" path="email" name="email" type="text"/><br/>
                 <div class="error"><sform:errors path="email"/></div>

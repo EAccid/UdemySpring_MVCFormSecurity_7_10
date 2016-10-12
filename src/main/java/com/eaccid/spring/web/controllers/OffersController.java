@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -42,22 +43,20 @@ public class OffersController {
     @RequestMapping("/createoffer")
     public String createOffer(Model model) {
 
-        model.addAttribute("offer", new Offer()); //<sform:form method="post" action="${pageContext.request.contextPath}/docreate" commandName="offer">
+        model.addAttribute("offer", new Offer());
 
         return "createoffer";
     }
 
     @RequestMapping(value = "/docreate", method = RequestMethod.POST)
-    public String doCreate(Model model, @Valid Offer offer, BindingResult result) {
+    public String doCreate(Model model, @Valid Offer offer, BindingResult result, Principal principal) {
 
         if (result.hasErrors()) {
-//            System.out.println("Form does not validate.");
-//            List<ObjectError> errors = result.getAllErrors();
-//            errors.stream().forEach(error -> System.out.println(error.getDefaultMessage()));
             return "createoffer";
-//        } else {
-//            System.out.println("Form validated.");
         }
+
+        String username = principal.getName();
+        offer.getUser().setUsername(username);
 
         offersService.create(offer);
 
