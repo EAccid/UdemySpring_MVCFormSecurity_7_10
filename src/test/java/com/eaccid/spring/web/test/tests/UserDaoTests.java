@@ -25,29 +25,61 @@ public class UserDaoTests {
 
     @Autowired
     private UsersDao usersDao;
+
     @Autowired
     private DataSource dataSource;
+
+    private User user1 = new User("johnwpurcell", "John Purcell", "hellothere",
+            "john@caveofprogramming.com", true, "ROLE_USER");
+    private User user2 = new User("richardhannay", "Richard Hannay", "the39steps",
+            "richard@caveofprogramming.com", true, "ROLE_ADMIN");
+    private User user3 = new User("suetheviolinist", "Sue Black", "iloveviolins",
+            "sue@caveofprogramming.com", true, "ROLE_USER");
+    private User user4 = new User("rogerblake", "Rog Blake", "liberator",
+            "rog@caveofprogramming.com", false, "user");
 
     @Before
     public void init() {
         JdbcTemplate jdbc = new JdbcTemplate(dataSource);
-        jdbc.execute("DELETE FROM offers");
-        jdbc.execute("DELETE FROM users");
+
+        jdbc.execute("delete from offers");
+        jdbc.execute("delete from users");
     }
 
     @Test
-    public void testUser() {
+    public void testCreateRetrieve() {
+        usersDao.create(user1);
 
-        User user = new User("olena", "Olena B","hellohello", "olena@eaccid.com", true, "ROLE_USER");
-        Assert.assertTrue("User creation should return true", usersDao.create(user));
+        List<User> users1 = usersDao.getAllUsers();
+
+        Assert.assertEquals("One user should have been created and retrieved", 1, users1.size());
+
+        Assert.assertEquals("Inserted user should match retrieved", user1, users1.get(0));
+
+        usersDao.create(user2);
+        usersDao.create(user3);
+        usersDao.create(user4);
+
+        List<User> users2 = usersDao.getAllUsers();
+
+        Assert.assertEquals("Should be four retrieved users.", 4, users2.size());
+    }
+
+    // TODO - Reimplement this
+    @Test
+    public void testUsers() {
+        User user = new User("olenabrygynets", "Olena Brygynets", "hellohello", "olena@eaccid.com", true, "ROLE_USER");
+
+        usersDao.create(user);
 
         List<User> users = usersDao.getAllUsers();
-        Assert.assertEquals("Number of users should be 1", users.size(), 1);
+
+        Assert.assertEquals("Number of users should be 1.", 1, users.size());
 
         Assert.assertTrue("User should exist.", usersDao.exists(user.getUsername()));
 
-        Assert.assertEquals("Created user should be identical to retrieved user", user, users.get(0));
-
+        Assert.assertEquals("Created user should be identical to retrieved user",
+                user, users.get(0));
 
     }
 

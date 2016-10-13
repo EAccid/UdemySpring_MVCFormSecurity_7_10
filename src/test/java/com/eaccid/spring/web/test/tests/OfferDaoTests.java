@@ -48,8 +48,8 @@ public class OfferDaoTests {
     @Test
     public void testOffer() {
 
-        User user = new User("olena", "Olena B", "hellohello", "olena@eaccid.com", true, "ROLE_USER");
-        Assert.assertTrue("User creation should return true", usersDao.create(user));
+        User user = new User("olenabrygynets", "Olena Brygynets", "hellohello", "olena@eaccid.com", true, "ROLE_USER");
+        usersDao.create(user);
 
         Offer offer = new Offer(user, "This is a test offer.");
         assertTrue("Offer creation should return true", offersDao.create(offer));
