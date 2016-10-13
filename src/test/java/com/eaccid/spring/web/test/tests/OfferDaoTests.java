@@ -88,6 +88,33 @@ public class OfferDaoTests {
         assertEquals("Should be six offers for enabled users.", 6, offers2.size());
     }
 
+
+    @Test
+    public void testGetUsername() {
+        usersDao.create(user1);
+        usersDao.create(user2);
+        usersDao.create(user3);
+        usersDao.create(user4);
+
+        offersDao.create(offer1);
+        offersDao.create(offer2);
+        offersDao.create(offer3);
+        offersDao.create(offer4);
+        offersDao.create(offer5);
+        offersDao.create(offer6);
+        offersDao.create(offer7);
+
+        List<Offer> offers1 = offersDao.getOffers(user3.getUsername());
+        assertEquals("Should be three offers for this user.", 3, offers1.size());
+
+        List<Offer> offers2 = offersDao.getOffers("sdfsfd");
+        assertEquals("Should be zero offers for this user.", 0, offers2.size());
+
+        List<Offer> offers3 = offersDao.getOffers(user2.getUsername());
+        assertEquals("Should be 1 offer for this user.", 1, offers3.size());
+    }
+
+
     @Test
     public void testOffers() {
 
