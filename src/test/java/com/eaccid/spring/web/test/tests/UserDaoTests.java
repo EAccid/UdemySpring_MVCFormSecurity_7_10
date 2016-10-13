@@ -29,8 +29,8 @@ public class UserDaoTests {
     @Autowired
     private DataSource dataSource;
 
-    private User user1 = new User("johnwpurcell", "John Purcell", "hellothere",
-            "john@caveofprogramming.com", true, "ROLE_USER");
+    private User user1 = new User("olenabrygynets", "Olena Brygynets", "hellohello",
+            "olena@eaccid.com", true, "ROLE_USER");
     private User user2 = new User("richardhannay", "Richard Hannay", "the39steps",
             "richard@caveofprogramming.com", true, "ROLE_ADMIN");
     private User user3 = new User("suetheviolinist", "Sue Black", "iloveviolins",
@@ -65,23 +65,16 @@ public class UserDaoTests {
         Assert.assertEquals("Should be four retrieved users.", 4, users2.size());
     }
 
-    // TODO - Reimplement this
     @Test
-    public void testUsers() {
-        User user = new User("olenabrygynets", "Olena Brygynets", "hellohello", "olena@eaccid.com", true, "ROLE_USER");
+    public void testExists() {
+        usersDao.create(user1);
+        usersDao.create(user2);
+        usersDao.create(user3);
 
-        usersDao.create(user);
-
-        List<User> users = usersDao.getAllUsers();
-
-        Assert.assertEquals("Number of users should be 1.", 1, users.size());
-
-        Assert.assertTrue("User should exist.", usersDao.exists(user.getUsername()));
-
-        Assert.assertEquals("Created user should be identical to retrieved user",
-                user, users.get(0));
-
+        Assert.assertTrue("User should exist.", usersDao.exists(user2.getUsername()));
+        Assert.assertFalse("User should not exist.", usersDao.exists("xkjhsfjlsjf"));
     }
+
 
 
 }
