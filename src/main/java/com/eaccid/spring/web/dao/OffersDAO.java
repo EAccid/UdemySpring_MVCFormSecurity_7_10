@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 @Component("offersDao")
@@ -26,9 +24,13 @@ public class OffersDao {
 
     public List<Offer> getOffers() {
         return jdbc.query("select * from offers, users where offers.username = users.username " +
-                "and enabled = true", (rs, rowNum) -> {
-            return newOffer(rs);
-        });
+                "and enabled = true", new OfferRowMapper());
+    }
+
+    public List<Offer> getOffers(String username) {
+        return jdbc.query("select * from offers, users where offers.username = users.username " +
+                "and enabled = true and offers.username = :username", new MapSqlParameterSource("username", username),
+                new OfferRowMapper());
     }
 
     public boolean update(Offer offer) {
@@ -64,27 +66,8 @@ public class OffersDao {
         params.addValue("id", id);
 
         return jdbc.queryForObject("select * from offers, users where offers.username = users.username " +
-                "and enabled = true", params, (rs, rowNum) -> {
-            return newOffer(rs);
-        });
+                "and enabled = true and offers.id = :id", params, new OfferRowMapper());
     }
 
-    private Offer newOffer(ResultSet rs) throws SQLException {
-
-        User user = new User();
-        user.setAuthority(rs.getString("authority"));
-        user.setEmail(rs.getString("email"));
-        user.setEnabled(true);
-        user.setName(rs.getString("name"));
-        user.setUsername(rs.getString("username"));
-
-
-        Offer offer = new Offer();
-        offer.setId(rs.getInt("id"));
-        offer.setText(rs.getString("text"));
-        offer.setUser(user);
-        return offer;
-
-    }
 
 }
