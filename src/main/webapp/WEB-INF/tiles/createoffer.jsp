@@ -2,6 +2,28 @@
 <%@ taglib prefix="sform" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script type="text/javascript">
+
+   <!--
+
+    function onDeleteClick() {
+        var doDelete = confirm("Are you sure you want delete this offer?");
+
+        if (doDelete  == false) {
+            event.preventDefault();
+        }
+    }
+
+    function onReady() {
+        $("#delete").click(onDeleteClick);
+    }
+
+    $(document).ready(onReady);
+
+    //-->
+
+</script>
+
 <sform:form method="post" action="${pageContext.request.contextPath}/docreate" commandName="offer">
 
     <sform:input type="hidden" name="id" path="id"/>
@@ -31,7 +53,8 @@
 
             <tr>
                 <td class="label"></td>
-                <td><input class="control" name="delete" value="Delete this offer" type="submit"></td>
+                <td><input class="delete control" name="delete"
+                           id="delete" value="Delete this offer" type="submit"></td>
             </tr>
 
         </c:if>
