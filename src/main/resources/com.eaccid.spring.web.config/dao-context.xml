@@ -15,7 +15,6 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.eaccid.spring.web.dao"/>
 
-
     <beans profile="production">
 
         <jee:jndi-lookup id="dataSource"
@@ -25,12 +24,13 @@
         <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
             <property name="dataSource" ref="dataSource"/>
         </bean>
+
         <tx:annotation-driven/>
 
-        <bean id = "sessionFactory"
+        <bean id="sessionFactory"
               class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
             <property name="dataSource" ref="dataSource"/>
-            <property name="hibernateProperties" >
+            <property name="hibernateProperties">
                 <props>
                     <prop key="hibernate.dialect">
                         org.hibernate.dialect.MySQL5Dialect
@@ -54,5 +54,9 @@
 
         </bean>
 
+        <bean id="exceptionTranslator"
+              class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
     </beans>
+
 </beans>
