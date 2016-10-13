@@ -3,14 +3,22 @@ package com.eaccid.spring.web.dao;
 import com.eaccid.spring.web.validation.ValidEmail;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+@Entity
+@Table(name = "users")
 public class User {
 
     @NotBlank
     @Size(min = 8, max = 15)
     @Pattern(regexp = "^\\w{8,}$")
+    @Id
+    @Column(name = "username")
     private String username;
 
     @NotBlank
