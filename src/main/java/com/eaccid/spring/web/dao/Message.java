@@ -4,10 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name="messages")
-public class Message {
+public class Message implements Serializable{
 
     @Id
     @GeneratedValue
@@ -25,8 +26,12 @@ public class Message {
     //send message to this user
     private String username;
 
-    public Message() {
 
+    public Message() {
+        this.subject = "Subject goes here";
+        this.content = "Content goes here";
+        this.name = "some Name";
+        this.email = "An email address";
     }
 
     public Message(String subject, String content, String name, String email, String username) {
