@@ -11,7 +11,7 @@
     <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
     <%--after submit--%>
     <input type="hidden" name="_eventId" value="send"/>
-    <input type="hidden" name="username" value="olenabrygynets"/>
+    <%--<input type="hidden" name="username" value="olenabrygynets"/>--%> for testing
 
 
     <table class="formtable">
