@@ -5,34 +5,36 @@
 <h2>Send Message</h2>
 <%--name of bean:  commandName="message" --%>
 
+<%--User: ${fromUser}--%>
 
 <sform:form method="post" commandName="message">
 
     <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
     <%--after submit--%>
     <input type="hidden" name="_eventId" value="send"/>
-    <%--<input type="hidden" name="username" value="olenabrygynets"/>--%> for testing
+    <%--for testing--%>
+    <%--<input type="hidden" name="username" value="olenabrygynets"/>--%>
 
 
     <table class="formtable">
 
         <tr>
             <td class="label">Your name:</td>
-            <td><sform:input class="control" path="name" type="text"/><br/>
+            <td><sform:input class="control" path="name" type="text" value="${fromName}" /><br/>
                 <div class="error"><sform:errors path="name"/></div>
             </td>
         </tr>
 
         <tr>
             <td class="label">Your email:</td>
-            <td><sform:input class="control" path="email" type="text"/><br/>
+            <td><sform:input class="control" path="email" type="text" value="${fromEmail}" /><br/>
                 <div class="error"><sform:errors path="email"/></div>
             </td>
         </tr>
 
         <tr>
             <td class="label">Subject:</td>
-            <td><sform:input class="control" path="subject" type="text"/><br/>
+            <td><sform:input class="control" path="subject" type="text" /><br/>
                 <div class="error"><sform:errors path="subject"/></div>
             </td>
         </tr>
