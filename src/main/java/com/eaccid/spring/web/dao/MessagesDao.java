@@ -6,25 +6,22 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
 @Transactional
-@Component("offersDao")
-public class OffersDao {
+@Component("messagesDao")
+public class MessagesDao {
 
     @Autowired
     private SessionFactory sessionFactory;
 
-    public OffersDao() {
-        System.out.println("Successfully loaded offers DAO");
+    public MessagesDao() {
+        System.out.println("Successfully loaded messages Dao");
     }
 
     public Session session() {
@@ -32,16 +29,16 @@ public class OffersDao {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Offer> getOffers() {
-        Criteria crit = session().createCriteria(Offer.class);
+    public List<Message> getMessages() {
+        Criteria crit = session().createCriteria(Message.class);
         crit.createAlias("user", "u").add(Restrictions.eq("u.enabled", true));
         return crit.list();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Offer> getOffers(String username) {
+    public List<Message> getMessages(String username) {
 
-        Criteria crit = session().createCriteria(Offer.class);
+        Criteria crit = session().createCriteria(Message.class);
         crit.createAlias("user", "u");
         crit.add(Restrictions.eq("u.enabled", true));
         crit.add(Restrictions.eq("u.username", username));
@@ -49,26 +46,26 @@ public class OffersDao {
 
     }
 
-    public void saveOrUpdate(Offer offer) {
-        session().save(offer);
+    public void saveOrUpdate(Message message) {
+        session().save(message);
     }
 
     public boolean delete(int id) {
-        Query query = session().createQuery("delete from Offer where id=:id");
+        Query query = session().createQuery("delete from Message where id=:id");
         query.setLong("id", id);
         return query.executeUpdate() == 1;
     }
 
-    public Offer getOffer(int id) {
+    public Message getMessage(int id) {
 
-        Criteria crit = session().createCriteria(Offer.class);
+        Criteria crit = session().createCriteria(Message.class);
 
         crit.createAlias("user", "u");
 
         crit.add(Restrictions.eq("u.enabled", true));
         crit.add(Restrictions.idEq(id));
 
-        return (Offer)crit.uniqueResult();
+        return (Message) crit.uniqueResult();
     }
 
 }
