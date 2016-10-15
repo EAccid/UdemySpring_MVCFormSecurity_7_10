@@ -4,6 +4,11 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
     <var name="message" class="com.eaccid.spring.web.dao.Message"/>
-    <view-state id="ShowContactName" model="message"/>
+
+    <view-state id="showContactName" model="message">
+        <transition on="send" to="messageSent"/>
+    </view-state>
+
+    <view-state id="messageSent"/>
 
 </flow>
