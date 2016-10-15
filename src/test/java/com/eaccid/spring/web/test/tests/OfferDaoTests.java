@@ -4,7 +4,6 @@ import com.eaccid.spring.web.dao.Offer;
 import com.eaccid.spring.web.dao.OffersDao;
 import com.eaccid.spring.web.dao.User;
 import com.eaccid.spring.web.dao.UsersDao;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,8 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.sql.DataSource;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @ActiveProfiles("dev")
 @ContextConfiguration(locations = {
@@ -70,19 +68,19 @@ public class OfferDaoTests {
         usersDao.create(user3);
         usersDao.create(user4);
 
-        offersDao.create(offer1);
+        offersDao.saveOrUpdate(offer1);
 
         List<Offer> offers1 = offersDao.getOffers();
         assertEquals("Should be one offer.", 1, offers1.size());
 
         assertEquals("Retrieved offer should equal inserted offer.", offer1, offers1.get(0));
 
-        offersDao.create(offer2);
-        offersDao.create(offer3);
-        offersDao.create(offer4);
-        offersDao.create(offer5);
-        offersDao.create(offer6);
-        offersDao.create(offer7);
+        offersDao.saveOrUpdate(offer2);
+        offersDao.saveOrUpdate(offer3);
+        offersDao.saveOrUpdate(offer4);
+        offersDao.saveOrUpdate(offer5);
+        offersDao.saveOrUpdate(offer6);
+        offersDao.saveOrUpdate(offer7);
 
         List<Offer> offers2 = offersDao.getOffers();
         assertEquals("Should be six offers for enabled users.", 6, offers2.size());
@@ -96,13 +94,13 @@ public class OfferDaoTests {
         usersDao.create(user3);
         usersDao.create(user4);
 
-        offersDao.create(offer1);
-        offersDao.create(offer2);
-        offersDao.create(offer3);
-        offersDao.create(offer4);
-        offersDao.create(offer5);
-        offersDao.create(offer6);
-        offersDao.create(offer7);
+        offersDao.saveOrUpdate(offer1);
+        offersDao.saveOrUpdate(offer2);
+        offersDao.saveOrUpdate(offer3);
+        offersDao.saveOrUpdate(offer4);
+        offersDao.saveOrUpdate(offer5);
+        offersDao.saveOrUpdate(offer6);
+        offersDao.saveOrUpdate(offer7);
 
         List<Offer> offers1 = offersDao.getOffers(user3.getUsername());
         assertEquals("Should be three offers for this user.", 3, offers1.size());
@@ -114,58 +112,67 @@ public class OfferDaoTests {
         assertEquals("Should be 1 offer for this user.", 1, offers3.size());
     }
 
+    @Test
+    public void testUpdate() {
+        usersDao.create(user1);
+        usersDao.create(user2);
+        usersDao.create(user3);
+        usersDao.create(user4);
+        offersDao.saveOrUpdate(offer2);
+        offersDao.saveOrUpdate(offer3);
+        offersDao.saveOrUpdate(offer4);
+        offersDao.saveOrUpdate(offer5);
+        offersDao.saveOrUpdate(offer6);
+        offersDao.saveOrUpdate(offer7);
+
+        offer3.setText("This offer has updated text.");
+        offersDao.saveOrUpdate(offer3);
+
+        Offer retrieved = offersDao.getOffer(offer3.getId());
+        assertEquals("Retrieved offer should be updated.", offer3, retrieved);
+    }
+
 
     @Test
-    public void testOffers() {
+    public void testDelete() {
+        usersDao.create(user1);
+        usersDao.create(user2);
+        usersDao.create(user3);
+        usersDao.create(user4);
+        offersDao.saveOrUpdate(offer2);
+        offersDao.saveOrUpdate(offer3);
+        offersDao.saveOrUpdate(offer4);
+        offersDao.saveOrUpdate(offer5);
+        offersDao.saveOrUpdate(offer6);
+        offersDao.saveOrUpdate(offer7);
 
-        User user = new User("olenabrygynets", "Olena Brygynets", "hellohello",
-                "olena@eaccid.com", true, "ROLE_USER");
+        Offer retrieved1 = offersDao.getOffer(offer2.getId());
+        assertNotNull("Offer with ID " + retrieved1.getId() + " should not be null (deleted, actual)", retrieved1);
 
-        usersDao.create(user);
+        offersDao.delete(offer2.getId());
 
-        Offer offer = new Offer(user, "This is a test offer.");
+        Offer retrieved2 = offersDao.getOffer(offer2.getId());
+        assertNull("Offer with ID " + retrieved1.getId() + " should be null (deleted, actual)", retrieved2);
+    }
 
-        offersDao.create(offer);
+    @Test
+    public void testGetById() {
+        usersDao.create(user1);
+        usersDao.create(user2);
+        usersDao.create(user3);
+        usersDao.create(user4);
+        offersDao.saveOrUpdate(offer1);
+        offersDao.saveOrUpdate(offer2);
+        offersDao.saveOrUpdate(offer3);
+        offersDao.saveOrUpdate(offer4);
+        offersDao.saveOrUpdate(offer5);
+        offersDao.saveOrUpdate(offer6);
+        offersDao.saveOrUpdate(offer7);
 
-        List<Offer> offers = offersDao.getOffers();
+        Offer retrieved1 = offersDao.getOffer(offer1.getId());
+        assertEquals("Offers should match", offer1, retrieved1);
 
-        assertEquals("Should be one offer in database.", 1, offers.size());
-
-        assertEquals("Retrieved offer should match created offer.", offer,
-                offers.get(0));
-
-        // Get the offer with ID filled in.
-        offer = offers.get(0);
-
-        offer.setText("Updated offer text.");
-        offersDao.update(offer);
-
-        Offer updated = offersDao.getOffer(offer.getId());
-
-        assertEquals("Updated offer should match retrieved updated offer",
-                offer, updated);
-
-        // Test get by ID ///////
-        Offer offer2 = new Offer(user, "This is a test offer.");
-
-        offersDao.create(offer2);
-
-        List<Offer> userOffers = offersDao.getOffers(user.getUsername());
-        assertEquals("Should be two offers for user.", 2, userOffers.size());
-
-        List<Offer> secondList = offersDao.getOffers();
-
-        for(Offer current: secondList) {
-            Offer retrieved = offersDao.getOffer(current.getId());
-
-            assertEquals("Offer by ID should match offer from list.", current, retrieved);
-        }
-
-        // Test deletion
-        offersDao.delete(offer.getId());
-
-        List<Offer> finalList = offersDao.getOffers();
-
-        assertEquals("Offers lists should contain one offer.", 1, finalList.size());
+        Offer retrieved2 = offersDao.getOffer(offer7.getId());
+        assertNull("Should not retrieve offer for disabled user.", retrieved2);
     }
 }
