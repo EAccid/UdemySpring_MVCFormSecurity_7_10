@@ -1,5 +1,9 @@
 package com.eaccid.spring.web.dao;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.*;
 import org.springframework.stereotype.Component;
@@ -16,6 +20,9 @@ public class OffersDao {
 
     private NamedParameterJdbcTemplate jdbc;
 
+    @Autowired
+    private SessionFactory sessionFactory;
+
     public OffersDao() {
         System.out.println("Successfully loaded offers DAO");
     }
@@ -25,36 +32,34 @@ public class OffersDao {
         this.jdbc = new NamedParameterJdbcTemplate(jdbc);
     }
 
+    public Session session() {
+        return sessionFactory.getCurrentSession();
+    }
+
+    @SuppressWarnings("unchecked")
     public List<Offer> getOffers() {
-        return jdbc.query("select * from offers, users where offers.username = users.username " +
-                "and enabled = true", new OfferRowMapper());
+        Criteria crit = session().createCriteria(Offer.class);
+        crit.createAlias("user", "u").add(Restrictions.eq("u.enabled", true));
+        return crit.list();
     }
 
+    @SuppressWarnings("unchecked")
     public List<Offer> getOffers(String username) {
-        return jdbc.query("select * from offers, users where offers.username = users.username " +
-                "and enabled = true and offers.username = :username", new MapSqlParameterSource("username", username),
-                new OfferRowMapper());
+
+        Criteria crit = session().createCriteria(Offer.class);
+        crit.createAlias("user", "u");
+        crit.add(Restrictions.eq("u.enabled", true));
+        crit.add(Restrictions.eq("u.username", username));
+        return crit.list();
+
     }
 
-    public boolean update(Offer offer) {
-        BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(offer);
-
-        return jdbc.update("update offers set text=:text where id=:id", params) == 1;
+    public void update(Offer offer) {
+        session().update(offer);
     }
 
-    public boolean create(Offer offer) {
-
-        BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(offer);
-
-        return jdbc.update("insert into offers (username, text) values (:username, :text)", params) == 1;
-    }
-
-    @Transactional
-    public int[] create(List<Offer> offers) {
-
-        SqlParameterSource[] params = SqlParameterSourceUtils.createBatch(offers.toArray());
-
-        return jdbc.batchUpdate("insert into offers (username, text) values (:username, :text)", params);
+    public void create(Offer offer) {
+        session().save(offer);
     }
 
     public boolean delete(int id) {
@@ -71,6 +76,5 @@ public class OffersDao {
         return jdbc.queryForObject("select * from offers, users where offers.username = users.username " +
                 "and enabled = true and offers.id = :id", params, new OfferRowMapper());
     }
-
 
 }
