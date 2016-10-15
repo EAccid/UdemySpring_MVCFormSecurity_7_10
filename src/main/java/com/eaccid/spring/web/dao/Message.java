@@ -1,26 +1,35 @@
 package com.eaccid.spring.web.dao;
 
+import com.eaccid.spring.web.validation.ValidEmail;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@Table(name="messages")
-public class Message implements Serializable{
+@Table(name = "messages")
+public class Message implements Serializable {
 
     @Id
     @GeneratedValue
     private int id;
 
+    @Size(min = 5, max = 100)
     private String subject;
+    @Size(min = 5, max = 100)
     private String content;
 
     //name of user sending message
+    @NotBlank
+    @Size(min = 8, max = 60)
     private String name;
 
     //sender's email
+    @ValidEmail
     private String email;
 
     //send message to this user
