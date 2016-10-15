@@ -5,11 +5,14 @@
 <h2>Send Message</h2>
 <%--name of bean:  commandName="message" --%>
 
+
 <sform:form method="post" commandName="message">
 
     <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
     <%--after submit--%>
     <input type="hidden" name="_eventId" value="send"/>
+    <input type="hidden" name="username" value="olenabrygynets"/>
+
 
     <table class="formtable">
 

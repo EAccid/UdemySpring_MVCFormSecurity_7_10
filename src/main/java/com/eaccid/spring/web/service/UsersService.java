@@ -1,5 +1,7 @@
 package com.eaccid.spring.web.service;
 
+import com.eaccid.spring.web.dao.Message;
+import com.eaccid.spring.web.dao.MessagesDao;
 import com.eaccid.spring.web.dao.User;
 import com.eaccid.spring.web.dao.UsersDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +13,10 @@ import java.util.List;
 @Service("usersService")
 public class UsersService {
 
-    private UsersDao usersDao;
-
     @Autowired
-    public void setOffersDao(UsersDao usersDao) {
-        this.usersDao = usersDao;
-    }
+    private UsersDao usersDao;
+    @Autowired
+    private MessagesDao messagesDao;
 
     public void create(User user) {
         usersDao.create(user);
@@ -29,5 +29,9 @@ public class UsersService {
     @Secured("ROLE_ADMIN")
     public List<User> getAllUsers() {
         return usersDao.getAllUsers();
+    }
+
+    public void sendMessage(Message message) {
+        messagesDao.saveOrUpdate(message);
     }
 }

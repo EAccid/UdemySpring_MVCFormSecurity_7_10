@@ -6,9 +6,15 @@
     <var name="message" class="com.eaccid.spring.web.dao.Message"/>
 
     <view-state id="showContactName" model="message">
-        <transition on="send" to="messageSent"/>
+        <transition on="send" to="sendMessage"/>
     </view-state>
 
+    <action-state id="sendMessage">
+        <evaluate expression="usersService.sendMessage(message)"/>
+        <transition to="messageSent"/>
+    </action-state>
+
     <view-state id="messageSent"/>
+
 
 </flow>

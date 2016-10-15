@@ -82,6 +82,18 @@ public class Message implements Serializable{
         this.email = email;
     }
 
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", subject='" + subject + '\'' +
+                ", content='" + content + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                '}';
+    }
+
     public String getUsername() {
         return username;
     }

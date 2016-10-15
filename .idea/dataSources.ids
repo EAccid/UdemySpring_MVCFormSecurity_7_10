@@ -10,59 +10,98 @@
       <schema id="1" name="springtutorial"/>
       <table id="2" parent="1" name="offers"/>
       <table id="3" parent="1" name="users"/>
-      <column id="4" parent="2" name="id">
+      <table id="4" parent="1" name="messages"/>
+      <column id="5" parent="2" name="id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="5" parent="2" name="text">
+      <column id="6" parent="2" name="text">
         <mandatory>1</mandatory>
         <data-type>text</data-type>
       </column>
-      <column id="6" parent="2" name="username">
+      <column id="7" parent="2" name="username">
         <mandatory>1</mandatory>
         <data-type>varchar(60)</data-type>
       </column>
-      <index id="7" parent="2" name="fk_offers_users_idx">
+      <index id="8" parent="2" name="fk_offers_users_idx">
         <columns>username</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="8" parent="2" name="PRIMARY">
+      <key id="9" parent="2" name="PRIMARY">
         <columns>id
 username</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="9" parent="2" name="fk_offers_users">
+      <foreign-key id="10" parent="2" name="fk_offers_users">
         <columns>username</columns>
         <ref-key>~.users.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="10" parent="3" name="username">
+      <column id="11" parent="3" name="username">
         <mandatory>1</mandatory>
         <data-type>varchar(60)</data-type>
       </column>
-      <column id="11" parent="3" name="password">
+      <column id="12" parent="3" name="password">
         <data-type>varchar(80)</data-type>
       </column>
-      <column id="12" parent="3" name="enabled">
+      <column id="13" parent="3" name="enabled">
         <data-type>tinyint(1)</data-type>
         <default-expression>&apos;1&apos;</default-expression>
       </column>
-      <column id="13" parent="3" name="email">
+      <column id="14" parent="3" name="email">
         <mandatory>1</mandatory>
         <data-type>varchar(60)</data-type>
       </column>
-      <column id="14" parent="3" name="name">
+      <column id="15" parent="3" name="name">
         <mandatory>1</mandatory>
         <data-type>varchar(100)</data-type>
       </column>
-      <column id="15" parent="3" name="authority">
+      <column id="16" parent="3" name="authority">
         <data-type>varchar(45)</data-type>
       </column>
-      <key id="16" parent="3" name="PRIMARY">
+      <key id="17" parent="3" name="PRIMARY">
         <columns>username</columns>
         <primary>1</primary>
       </key>
+      <column id="18" parent="4" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="19" parent="4" name="subject">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="20" parent="4" name="content">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="21" parent="4" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="22" parent="4" name="email">
+        <data-type>varchar(60)</data-type>
+      </column>
+      <column id="23" parent="4" name="username">
+        <mandatory>1</mandatory>
+        <data-type>varchar(60)</data-type>
+      </column>
+      <index id="24" parent="4" name="fk_messages_users1_idx">
+        <columns>username</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="25" parent="4" name="PRIMARY">
+        <columns>id
+username</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="26" parent="4" name="fk_messages_users1">
+        <columns>username</columns>
+        <ref-key>~.users.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
     </database-model>
   </data-source>
   <data-source name="MySQL - springtest@localhost" uuid="824edad4-0d26-495a-9132-92fe25220ce7">
@@ -75,59 +114,98 @@ username</columns>
       <schema id="1" name="springtest"/>
       <table id="2" parent="1" name="offers"/>
       <table id="3" parent="1" name="users"/>
-      <column id="4" parent="2" name="id">
+      <table id="4" parent="1" name="messages"/>
+      <column id="5" parent="2" name="id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="5" parent="2" name="text">
+      <column id="6" parent="2" name="text">
         <mandatory>1</mandatory>
         <data-type>text</data-type>
       </column>
-      <column id="6" parent="2" name="username">
+      <column id="7" parent="2" name="username">
         <mandatory>1</mandatory>
         <data-type>varchar(60)</data-type>
       </column>
-      <index id="7" parent="2" name="fk_offers_users_idx">
+      <index id="8" parent="2" name="fk_offers_users_idx">
         <columns>username</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="8" parent="2" name="PRIMARY">
+      <key id="9" parent="2" name="PRIMARY">
         <columns>id
 username</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="9" parent="2" name="fk_offers_users">
+      <foreign-key id="10" parent="2" name="fk_offers_users">
         <columns>username</columns>
         <ref-key>~.users.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="10" parent="3" name="username">
+      <column id="11" parent="3" name="username">
         <mandatory>1</mandatory>
         <data-type>varchar(60)</data-type>
       </column>
-      <column id="11" parent="3" name="password">
+      <column id="12" parent="3" name="password">
         <data-type>varchar(80)</data-type>
       </column>
-      <column id="12" parent="3" name="enabled">
+      <column id="13" parent="3" name="enabled">
         <data-type>tinyint(1)</data-type>
         <default-expression>&apos;1&apos;</default-expression>
       </column>
-      <column id="13" parent="3" name="email">
+      <column id="14" parent="3" name="email">
         <mandatory>1</mandatory>
         <data-type>varchar(60)</data-type>
       </column>
-      <column id="14" parent="3" name="name">
+      <column id="15" parent="3" name="name">
         <mandatory>1</mandatory>
         <data-type>varchar(100)</data-type>
       </column>
-      <column id="15" parent="3" name="authority">
+      <column id="16" parent="3" name="authority">
         <data-type>varchar(45)</data-type>
       </column>
-      <key id="16" parent="3" name="PRIMARY">
+      <key id="17" parent="3" name="PRIMARY">
         <columns>username</columns>
         <primary>1</primary>
       </key>
+      <column id="18" parent="4" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="19" parent="4" name="subject">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="20" parent="4" name="content">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="21" parent="4" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="22" parent="4" name="email">
+        <data-type>varchar(60)</data-type>
+      </column>
+      <column id="23" parent="4" name="username">
+        <mandatory>1</mandatory>
+        <data-type>varchar(60)</data-type>
+      </column>
+      <index id="24" parent="4" name="fk_messages_users1_idx">
+        <columns>username</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="25" parent="4" name="PRIMARY">
+        <columns>id
+username</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="26" parent="4" name="fk_messages_users1">
+        <columns>username</columns>
+        <ref-key>~.users.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
     </database-model>
   </data-source>
 </component>
