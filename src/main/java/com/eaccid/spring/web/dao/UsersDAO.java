@@ -41,11 +41,7 @@ public class UsersDao {
     }
 
     public boolean exists(String username) {
-        Criteria criteria = session().createCriteria(User.class);
-//        criteria.add(Restrictions.eq("username", username)); //"username" - field in object, not in db
-        criteria.add(Restrictions.idEq(username));
-        User user = (User) criteria.uniqueResult();
-        return user != null;
+        return getUser(username) != null;
     }
 
     @SuppressWarnings("unchecked")
@@ -53,4 +49,9 @@ public class UsersDao {
         return session().createQuery("from User").list();
     }
 
+    public User getUser(String username) {
+        Criteria criteria = session().createCriteria(User.class);
+        criteria.add(Restrictions.idEq(username));
+        return (User) criteria.uniqueResult();
+    }
 }
