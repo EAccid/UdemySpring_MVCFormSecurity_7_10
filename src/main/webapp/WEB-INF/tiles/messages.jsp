@@ -9,11 +9,15 @@
 
 <script type="text/javascript">
     <!--
+    function showReply(i) {
+        $("#form" + i).toggle();
+    }
+
     function showMessages(data) {
 
         $("div#messages").html("");
 
-        for(var i=0; i<data.messages.length; i++) {
+        for (var i = 0; i < data.messages.length; i++) {
             var message = data.messages[i];
 
             var messageDiv = document.createElement("div");
@@ -29,11 +33,35 @@
 
             var nameSpan = document.createElement("span");
             nameSpan.setAttribute("class", "name");
-            nameSpan.appendChild(document.createTextNode(message.name + " (" + message.email + ")"));
+            nameSpan.appendChild(document.createTextNode(message.name + " ("));
+
+            var link = document.createElement("a");
+            link.setAttribute("class", "replylink");
+            link.setAttribute("href", "#");
+            link.setAttribute("onClick", "showReply(" + i + ")");
+            link.appendChild(document.createTextNode(message.email));
+            nameSpan.appendChild(link);
+            nameSpan.appendChild(document.createTextNode(")"));
+
+            var replyForm = document.createElement("form");
+            replyForm.setAttribute("class", "replyform");
+            replyForm.setAttribute("id", "form"+i);
+
+            var textArea = document.createElement("textarea");
+            textArea.setAttribute("class", "replyarea");
+
+            var replyButton = document.createElement("input");
+            replyButton.setAttribute("class", "replybutton");
+            replyButton.setAttribute("type", "button");
+            replyButton.setAttribute("value", "Reply");
+
+            replyForm.appendChild(textArea);
+            replyForm.appendChild(replyButton);
 
             messageDiv.appendChild(subjectSpan);
             messageDiv.appendChild(contentSpan);
             messageDiv.appendChild(nameSpan);
+            messageDiv.appendChild(replyForm);
 
             $("div#messages").append(messageDiv);
         }
