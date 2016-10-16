@@ -87,20 +87,22 @@ table.offers {
     border: 2px solid rebeccapurple;
 }
 
-table.offers td{
+table.offers td {
     vertical-align: top;
     border-bottom: 1px dashed brown;
     padding-bottom: 5px;
 }
 
 td.name {
-
-color: green;
-
+    color: green;
 }
 
 td.contact {
-
     padding: 0px 20px;
+}
 
+div.toolbar {
+    position: relative;
+    padding-left: 40px;
+    top: 10px;;
 }

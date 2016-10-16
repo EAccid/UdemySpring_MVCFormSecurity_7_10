@@ -2,29 +2,35 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<p/>
+
 <table class="offers">
+
     <c:forEach var="offer" items="${offers}">
-        <tr class = "offerrow">
-            <td class="name"><c:out value="${offer.user.name}"/></td>
-            <td class ="contact"><a href="<c:url value="/message?uid=${offer.user.username}"/>">contact</a> </td>
-            <td class ="text"><c:out value="${offer.text}"/></td>
+        <tr class="offerrow">
+            <td class="name"><c:out value="${offer.user.name}"></c:out></td>
+            <td class="contact"><a
+                    href="<c:url value='/message?uid=${offer.username}'/>">contact</a></td>
+            <td class="offer"><c:out value="${offer.text}"></c:out></td>
         </tr>
     </c:forEach>
 </table>
 
-<p/>
+<script type="text/javascript">
+    <!--
+    function updateMessageLink(data) {
+        $("#numberMessages").text(data.number);
+    }
 
-<c:choose>
-    <c:when test="${hasOffer}">
-        <p><a href="${pageContext.request.contextPath}/createoffer">Edit or delete your current offer.</a></p>
-    </c:when>
-    <c:otherwise>
-        <p><a href="${pageContext.request.contextPath}/createoffer">Add a new offer.</a></p>
-    </c:otherwise>
-</c:choose>
+    function onLoad() {
+        updatePage();
+        window.setInterval(updatePage, 5000);
+    }
 
+    function updatePage() {
+        $.getJSON("<c:url value="/getmessages"/>", updateMessageLink);
+    }
 
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-    <p><a href="${pageContext.request.contextPath}/admin"> --> Admin</a></p>
-</sec:authorize>
-
+    $(document).ready(onLoad);
+    //-->
+</script>

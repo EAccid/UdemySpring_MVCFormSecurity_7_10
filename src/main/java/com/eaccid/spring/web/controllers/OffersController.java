@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 public class OffersController {
@@ -29,15 +28,6 @@ public class OffersController {
     public String showTest(Model model, @RequestParam("id") String id) {
         System.out.println("Id is: " + id);
         return "home";
-    }
-
-    @RequestMapping("/offers")
-    public String showOffers(Model model) {
-
-        List<Offer> offers = offersService.getCurrent();
-        model.addAttribute("offers", offers);
-
-        return "offers";
     }
 
     @RequestMapping("/createoffer")
