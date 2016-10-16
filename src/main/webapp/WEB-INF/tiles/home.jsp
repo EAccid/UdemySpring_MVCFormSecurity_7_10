@@ -3,16 +3,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <table class="offers">
-    <tr>
-        <td>Name</td>
-        <td>Username</td>
-        <td>Offer</td>
-    </tr>
     <c:forEach var="offer" items="${offers}">
-        <tr>
-            <td><c:out value="${offer.user.name}"/></td>
-            <td><a href="<c:url value="/message?uid=${offer.user.username}"/>">contact</a> </td>
-            <td><c:out value="${offer.text}"/></td>
+        <tr class = "offerrow">
+            <td class="name"><c:out value="${offer.user.name}"/></td>
+            <td class ="contact"><a href="<c:url value="/message?uid=${offer.user.username}"/>">contact</a> </td>
+            <td class ="text"><c:out value="${offer.text}"/></td>
         </tr>
     </c:forEach>
 </table>

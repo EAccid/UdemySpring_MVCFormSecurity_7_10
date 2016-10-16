@@ -1,5 +1,6 @@
 package com.eaccid.spring.web.controllers;
 import com.eaccid.spring.web.dao.FormValidationGroup;
+import com.eaccid.spring.web.dao.Message;
 import com.eaccid.spring.web.dao.User;
 import com.eaccid.spring.web.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class LoginController {
@@ -84,5 +90,23 @@ public class LoginController {
         }
 
         return "accountcreated";
+    }
+
+    @RequestMapping(value = "/getmessages", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody Map<String, Object> getMessages(Principal principal) {
+
+        List<Message> messages = null;
+        if (principal == null) {
+            messages = new ArrayList<>();
+        } else {
+            String username = principal.getName();
+            messages = usersService.getMessages(username);
+
+        }
+        Map<String, Object> data = new HashMap<>();
+        data.put("messages", messages);
+        data.put("number", messages.size());
+
+        return data;
     }
 }

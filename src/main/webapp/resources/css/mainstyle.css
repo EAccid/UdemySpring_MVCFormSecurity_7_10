@@ -40,11 +40,6 @@ textarea {
     margin-left: 10px;
 }
 
-table.offers {
-    padding: 20px;
-    border: 2px solid rebeccapurple;
-}
-
 p.error {
     font-size: medium;
     color: blue;
@@ -83,4 +78,29 @@ a.title {
 input.delete {
     margin-left: 10px;
     border: 1px solid darkred;
+}
+
+/*offers*/
+
+table.offers {
+    padding: 20px;
+    border: 2px solid rebeccapurple;
+}
+
+table.offers td{
+    vertical-align: top;
+    border-bottom: 1px dashed brown;
+    padding-bottom: 5px;
+}
+
+td.name {
+
+color: green;
+
+}
+
+td.contact {
+
+    padding: 0px 20px;
+
 }
