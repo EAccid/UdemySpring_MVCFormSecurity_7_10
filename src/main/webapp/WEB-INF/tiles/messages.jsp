@@ -4,11 +4,7 @@
 <%@ taglib prefix="sec"
            uri="http://www.springframework.org/security/tags"%>
 
-<div id="messages">
-
-
-</div>
-
+<div id="messages"/>
 
 <script type="text/javascript">
     <!--
@@ -19,8 +15,29 @@
         $("#form" + i).toggle();
     }
 
-    function sendMessage(i) {
-        alert($("#textbox" + i).val());
+    function success(data) {
+        $("#form" + data.target).toggle();
+        $("#alert" + data.target).text("Message sent.")
+        startTimer();
+    }
+
+    function error(data) {
+        alert("Error sending message.");
+    }
+
+    function sendMessage(i, name, email) {
+
+        var text = $("#textbox" + i).val();
+
+        $.ajax({
+            "type": 'POST',
+            "url": '<c:url value="/sendmessage" />',
+            "data": JSON.stringify({"target": i, "text": text, "name": name, "email": email}),
+            "success": success,
+            "error": error,
+            contentType: "application/json",
+            dataType: "json"
+        });
     }
 
     function showMessages(data) {
@@ -53,6 +70,12 @@
             nameSpan.appendChild(link);
             nameSpan.appendChild(document.createTextNode(")"));
 
+            var alertSpan = document.createElement("span");
+            alertSpan.setAttribute("class", "alert");
+            alertSpan.setAttribute("id", "alert" + i);
+            //alertSpan.appendChild(document.createTextNode("message sent"));
+
+
             var replyForm = document.createElement("form");
             replyForm.setAttribute("class", "replyform");
             replyForm.setAttribute("id", "form" + i);
@@ -65,11 +88,11 @@
             replyButton.setAttribute("class", "replybutton");
             replyButton.setAttribute("type", "button");
             replyButton.setAttribute("value", "Reply");
-            replyButton.onclick = function(j) {
+            replyButton.onclick = function(j, name, email) {
                 return function() {
-                    sendMessage(j);
+                    sendMessage(j, name, email);
                 }
-            }(i);
+            }(i, message.name, message.email);
 
             replyForm.appendChild(textarea);
             replyForm.appendChild(replyButton);
@@ -78,6 +101,7 @@
             messageDiv.appendChild(subjectSpan);
             messageDiv.appendChild(contentSpan);
             messageDiv.appendChild(nameSpan);
+            messageDiv.appendChild(alertSpan);
             messageDiv.appendChild(replyForm);
 
             $("div#messages").append(messageDiv);

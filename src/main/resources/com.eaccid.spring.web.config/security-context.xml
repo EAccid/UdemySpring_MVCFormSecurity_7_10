@@ -23,6 +23,9 @@
     </security:authentication-manager>
 
     <security:http use-expressions="true">
+
+        <security:csrf disabled="true" />
+
         <security:form-login login-page="/login" authentication-failure-url="/login?error=true"/>
         <security:logout logout-success-url="/loggedout" logout-url="/logout"/>
         <security:access-denied-handler error-page="/denied"/>
