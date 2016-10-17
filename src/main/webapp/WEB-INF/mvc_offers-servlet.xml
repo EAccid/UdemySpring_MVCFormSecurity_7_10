@@ -65,11 +65,26 @@
     </bean>
 
     <webflow-config:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator"
-    validator="validator"/>
+                                          validator="validator"/>
 
     <bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
         <property name="viewResolvers" ref="tilesViewResolver"/>
     </bean>
 
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+    <!--<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">-->
+        <!--<property name="host" value="smtp.gmail.com"/>-->
+        <!--<property name="port" value="587"/>-->
+        <!--<property name="username" value="javatest899@gmail.com"/>-->
+        <!--<property name="password" value="hellojavatest899"/>-->
+        <!--<property name="javaMailProperties">-->
+            <!--<props>-->
+                <!--<prop key="mail.smtp.auth">true</prop>-->
+                <!--<prop key="mail.smtp.starttls.enable">true</prop>-->
+                <!--<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
+
 </beans>

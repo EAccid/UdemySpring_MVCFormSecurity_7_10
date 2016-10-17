@@ -36,6 +36,7 @@
         <security:intercept-url pattern="/docreate" access="isAuthenticated()"/>
         <security:intercept-url pattern="/offercreated" access="isAuthenticated()"/>
         <security:intercept-url pattern="/getmessages" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/sendmessage" access="isAuthenticated()"/>
         <security:intercept-url pattern="/messages" access="isAuthenticated()"/>
 
         <security:intercept-url pattern="/" access="permitAll"/>

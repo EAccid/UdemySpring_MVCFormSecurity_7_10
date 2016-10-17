@@ -1,4 +1,5 @@
 package com.eaccid.spring.web.controllers;
+
 import com.eaccid.spring.web.dao.FormValidationGroup;
 import com.eaccid.spring.web.dao.Message;
 import com.eaccid.spring.web.dao.User;
@@ -23,6 +24,9 @@ import java.util.Map;
 public class LoginController {
 
     private UsersService usersService;
+
+//    @Autowired
+//    private MailSender mailSender;
 
     @Autowired
     public void setUsersService(UsersService usersService) {
@@ -59,7 +63,7 @@ public class LoginController {
     }
 
     @RequestMapping("/logout")
-    public String logoutUrl(){
+    public String logoutUrl() {
         return "logout";
     }
 
@@ -98,9 +102,11 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/getmessages", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody Map<String, Object> getMessages(Principal principal) {
+    public
+    @ResponseBody
+    Map<String, Object> getMessages(Principal principal) {
 
-        List<Message> messages = null;
+        List<Message> messages;
         if (principal == null) {
             messages = new ArrayList<>();
         } else {

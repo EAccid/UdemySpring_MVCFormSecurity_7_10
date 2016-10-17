@@ -1,23 +1,33 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+           uri="http://www.springframework.org/security/tags"%>
 
 <div id="messages">
+
+
 </div>
 
 
 <script type="text/javascript">
     <!--
+    var timer;
+
     function showReply(i) {
+        stopTimer();
         $("#form" + i).toggle();
+    }
+
+    function sendMessage(i) {
+        alert($("#textbox" + i).val());
     }
 
     function showMessages(data) {
 
         $("div#messages").html("");
 
-        for (var i = 0; i < data.messages.length; i++) {
+        for(var i=0; i<data.messages.length; i++) {
             var message = data.messages[i];
 
             var messageDiv = document.createElement("div");
@@ -38,25 +48,32 @@
             var link = document.createElement("a");
             link.setAttribute("class", "replylink");
             link.setAttribute("href", "#");
-            link.setAttribute("onClick", "showReply(" + i + ")");
+            link.setAttribute("onclick", "showReply(" + i + ")");
             link.appendChild(document.createTextNode(message.email));
             nameSpan.appendChild(link);
             nameSpan.appendChild(document.createTextNode(")"));
 
             var replyForm = document.createElement("form");
             replyForm.setAttribute("class", "replyform");
-            replyForm.setAttribute("id", "form"+i);
+            replyForm.setAttribute("id", "form" + i);
 
-            var textArea = document.createElement("textarea");
-            textArea.setAttribute("class", "replyarea");
+            var textarea = document.createElement("textarea")
+            textarea.setAttribute("class", "replyarea");
+            textarea.setAttribute("id", "textbox" + i);
 
             var replyButton = document.createElement("input");
             replyButton.setAttribute("class", "replybutton");
             replyButton.setAttribute("type", "button");
             replyButton.setAttribute("value", "Reply");
+            replyButton.onclick = function(j) {
+                return function() {
+                    sendMessage(j);
+                }
+            }(i);
 
-            replyForm.appendChild(textArea);
+            replyForm.appendChild(textarea);
             replyForm.appendChild(replyButton);
+
 
             messageDiv.appendChild(subjectSpan);
             messageDiv.appendChild(contentSpan);
@@ -69,7 +86,15 @@
 
     function onLoad() {
         updatePage();
-        window.setInterval(updatePage, 5000);
+        startTimer();
+    }
+
+    function startTimer() {
+        timer = window.setInterval(updatePage, 10000);
+    }
+
+    function stopTimer() {
+        window.clearInterval(timer);
     }
 
     function updatePage() {
